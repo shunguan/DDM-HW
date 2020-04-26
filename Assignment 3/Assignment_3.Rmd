@@ -224,12 +224,6 @@ Consider both: \newline
 • The case where 20 percent of the incremental units as predicted by the event lift are due to stockpiling (purchase acceleration), and hence not truly incremental \newline
 
 ```{r, fig.width = 6, fig.height = 3, fig.align = "center"}
-
-MDF_D_d = 3000
-MDF_J_d = 5000
-MDF_D_d_f = 4500
-MDF_J_d_f = 6800
-
 ROI_Summary <- function(model, TPR = 0, DIS = 0, FEA = 0, fixed_payment_cost = 0, regular_price = 1.2, regular_margin = 0.55, Stockpiling = 0) {
 
 baseline_units = exp(predict(D_d_f_lm, data.frame(price = regular_price, display = 0, feature = 0),
@@ -260,9 +254,9 @@ ROI = gross_contribution/event_cost
 list("Baseline units" = baseline_units,
      "Incremental units" = incremental_units,
      "Total units" = total_units,
-     "% incremental units purchase acceleration" = Stockpiling,
-     "Incremental units purchase acceleration" = incremental_units_Stockpiling,
-     "Incremental units net of purchase acceleration" = incremental_units_net,
+     "Precent with pa" = Stockpiling,
+     "Incremental units with pa" = incremental_units_Stockpiling,
+     "Incremental units net" = incremental_units_net,
      "Incremental contribution" = incremental_contribution,
      "Variable cost" = variable_cost,
      "Fixed payment cost" = fixed_payment_cost,
@@ -272,36 +266,53 @@ list("Baseline units" = baseline_units,
 }
 
 
-#For D
+
+
+#For Dominicks
 #(a) 
-ROI_Summary(D_d_f_lm, 0.15)
+df1 = data.frame(ROI_Summary(D_d_f_lm, 0.15))
 #(b)
-ROI_Summary(D_d_f_lm, 0.15, 0.7)
+df2 = data.frame(ROI_Summary(D_d_f_lm, 0.15, 0.7, fixed_payment_cost = 3000))
 #(c)
-ROI_Summary(D_d_f_lm, 0.15, 0.7, 1)
+df3 = data.frame(ROI_Summary(D_d_f_lm, 0.15, 0.7, 1, fixed_payment_cost = 4500))
+
+D_df = cbind(data.frame(t(df1)), data.frame(t(df2)), data.frame(t(df3)))
+colnames(D_df) = c("Dominicks(a)", "Dominicks(b)", "Dominicks(c)")
+print(D_df)
 
 #Consider stockpiling is 20%
 #(a) 
-ROI_Summary(D_d_f_lm, 0.15, Stockpiling = 0.2)
+df1 = data.frame(ROI_Summary(D_d_f_lm, 0.15, Stockpiling = 0.2))
 #(b)
-ROI_Summary(D_d_f_lm, 0.15, 0.7, Stockpiling = 0.2)
+df2 = data.frame(ROI_Summary(D_d_f_lm, 0.15, 0.7, fixed_payment_cost = 3000, Stockpiling = 0.2))
 #(c)
-ROI_Summary(D_d_f_lm, 0.15, 0.7, 1, Stockpiling = 0.2)
+df3 = data.frame(ROI_Summary(D_d_f_lm, 0.15, 0.7, 1, fixed_payment_cost = 4500, Stockpiling = 0.2))
 
+D_20_df = cbind(data.frame(t(df1)), data.frame(t(df2)), data.frame(t(df3)))
+colnames(D_20_df) = c("Dominicks(a)", "Dominicks(b)", "Dominicks(c)")
+print(D_20_df)
 
 #For Jewel
 #(a) 
-ROI_Summary(J_d_f_lm, 0.15)
+df1 = data.frame(ROI_Summary(J_d_f_lm, 0.15))
 #(b)
-ROI_Summary(J_d_f_lm, 0.15, 0.7)
+df2 = data.frame(ROI_Summary(J_d_f_lm, 0.15, 0.7, fixed_payment_cost = 5000))
 #(c)
-ROI_Summary(J_d_f_lm, 0.15, 0.7, 1)
+df3 = data.frame(ROI_Summary(J_d_f_lm, 0.15, 0.7, 1, fixed_payment_cost = 6800))
+
+J_20_df = cbind(data.frame(t(df1)), data.frame(t(df2)), data.frame(t(df3)))
+colnames(J_20_df) = c("Jewel(a)", "Jewel(b)", "Jewel(c)")
+print(J_20_df)
 
 #Consider stockpiling is 20%
 #(a) 
-ROI_Summary(J_d_f_lm, 0.15, Stockpiling = 0.2)
+df1 = data.frame(ROI_Summary(J_d_f_lm, 0.15, Stockpiling = 0.2))
 #(b)
-ROI_Summary(J_d_f_lm, 0.15, 0.7, Stockpiling = 0.2)
+df2 = data.frame(ROI_Summary(J_d_f_lm, 0.15, 0.7, Stockpiling = 0.2, fixed_payment_cost = 5000))
 #(c)
-ROI_Summary(J_d_f_lm, 0.15, 0.7, 1, Stockpiling = 0.2)
+df3 = data.frame(ROI_Summary(J_d_f_lm, 0.15, 0.7, 1, Stockpiling = 0.2, fixed_payment_cost = 6800))
+
+J_20_df = cbind(data.frame(t(df1)), data.frame(t(df2)), data.frame(t(df3)))
+colnames(J_20_df) = c("Jewel(a)", "Jewel(b)", "Jewel(c)")
+print(J_20_df)
 ```
