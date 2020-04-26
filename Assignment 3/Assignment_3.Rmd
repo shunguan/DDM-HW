@@ -19,7 +19,49 @@ knitr::opts_chunk$set(echo = TRUE, comment = NA, message = FALSE, eval = TRUE,
 \newpage
 
 # Promotional event planning
+1. Evidence for strong seasonal demand
+There is a strong seasonal demand for this product. Per event summary, the product has a much higher demand around the time of event 2. The base case for event 2 is 1,360, a 87% increase from event 1, a 469% increase from event 3, a 203% increase from event 4, and a 308% increase from event 5. Similarly, the base demand around event 1 is also higher than other events except event 2. The higher base demands around the time of event 2 and event 1 show a strong seasonal demand.
 
+2. Incremental sales response
+```{r}
+eventsummary = data.frame(baseQ = c(728, 1360), baseP = c(2.31, 2.31), promoQ = c(1129, 2303), promoP = c(1.99, 2.31))
+eventsummary$baseRev = eventsummary$baseQ*eventsummary$baseP
+eventsummary$promoRev = eventsummary$promoQ*eventsummary$promoP
+eventsummary$incrRevFrac = (eventsummary$promoRev - eventsummary$baseRev)/eventsummary$baseRev
+print(eventsummary)
+```
+Per summary Table, the incremental sales response for event 1 is 33.60% and for event 2 is 69.33%.
+
+3. Profitability results
+From ROI per event summary, event 5 is the most profitable with a ROI of 53%. Event 2 is the second, with a ROI of 44%. Event 1 does not have a profitable result with the promotion, with a negative ROI of -2%. Event 3, and 4 are even worse with much more negative ROIs of -22% and -79%.
+
+4. The profitability with forward buying
+```{r}
+eventsummary2 = data.frame(incrContr = c(8019, 18874), VC = c(4740, 9674), FC = c(2500, 2500))
+eventsummary2$ForwardBuyCost = c(962*2, 962*2)
+eventsummary2$eventCost = eventsummary2$VC + eventsummary2$FC + eventsummary2$ForwardBuyCost
+eventsummary2$grossContr = eventsummary2$incrContr - eventsummary2$eventCost
+eventsummary2$ROI = eventsummary2$grossContr/eventsummary2$incrContr
+print(eventsummary2)
+```
+The profit for event 1 will be -1145 with a ROI of -14.28% and for event 2 will be 4776 with a ROI of 25.30%.
+
+5. The approaches to calculate ROIs
+The Booz Allen Hamilton (BAH) approach and the one took in class are equally good. The BAH method is more applicable when considering each unit sale, while the one took in class is more generally applicable.
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 \newpage
 
 
@@ -38,7 +80,7 @@ Use the table (data frame) hellmans_df in the file Hellmans.RData. hellmans_DF c
 \medskip
 
 
-## Question
+## Question 1
 Create a price variable for Hellman’s 32oz mayo. Then, although not strictly necessary (because the estimated coefficients will scale in a linear regression), you should divide the feature and display columns (variables) by 100.
 Examine the feature and display variables. Provide summary statistics (number of observations, mean, standard deviation) and histograms of these variables, separately for both accounts. To what extent do these two promotional instruments differ?
 Calculate the correlations between feature_pctacv, display_pctacv, and price (use the cor function in R). Comment on your findings. Do the correlations indicate a potential problem for your regression analysis to be performed below?
@@ -95,7 +137,7 @@ cor(hellmans_df$display_pctacv, hellmans_df$price)
 
 \newpage
 
-## Question 
+## Question 2
 Estimate the log-linear demand model separately for each account, using price as the only explanatory variable. Then add the feature and display variables.
 Comment on the difference between the two regressions in terms of goodness of fit, and the price elasticity estimates. Is the change in price elasticity estimates as expected? What is the reason for this change? Are the coefficient estimates similar for both accounts?
 
@@ -152,7 +194,7 @@ summary(J_d_f_lm)
 
 \newpage
 
-## Question 
+## Question 3
 Consider the following three promotions: \newline
 (a) 15% TPR \newline
 (b) 15% TPR, 70% display \newline
@@ -210,7 +252,7 @@ print(lift_factor(J_d_f_lm, 0.15, 0.7, 1))
 ```
 \newpage
 
-## Question 
+## Question 4
 Perform an ROI analysis of the three promotions, (a), (b), and (c), separately for the two retail accounts, Dominick’s and Jewel-Osco. The promotions last for one week. Your analysis should follow the approach that we took in class, not the version of this approach taken by Booz Allen Hamilton in the first part of the assignment. \newline
 Note. Perform the analysis using units, not cases of Hellman’s mayo. You will need the following data for your analysis: \newline
 • The regular price of the product at both accounts is $1.20. \newline
