@@ -1,0 +1,65 @@
+---
+title: "Assignment 3: Promotions Management"
+author: "Group 11: Christina Wang, Kailin Fu, Shun Guan, Sylvia Lu, Yiran Huang"
+date: "April 27, 2020"
+output:
+  pdf_document:
+  number_sections: yes
+toc: yes
+urlcolor: blue
+graphics: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, message = FALSE, eval = TRUE,
+                      fig.width = 4.5, fig.height = 3, fig.align = "right")
+```
+
+\setlength{\parskip}{6pt}
+\newpage
+
+# Promotional event planning
+
+1. Evidence for strong seasonal demand
+There is a strong seasonal demand for this product. Per event summary, the product has a much higher demand around the time of event 2. The base case for event 2 is 1,360, a 87% increase from event 1, a 469% increase from event 3, a 203% increase from event 4, and a 308% increase from event 5. Similarly, the base demand around event 1 is also higher than other events except event 2. The higher base demands around the time of event 2 and event 1 show a strong seasonal demand.
+
+2. Incremental sales response
+```{r}
+eventsummary = data.frame(baseQ = c(728, 1360), baseP = c(2.31, 2.31), promoQ = c(1129, 2303), promoP = c(1.99, 2.31))
+eventsummary$baseRev = eventsummary$baseQ*eventsummary$baseP
+eventsummary$promoRev = eventsummary$promoQ*eventsummary$promoP
+eventsummary$incrRevFrac = (eventsummary$promoRev - eventsummary$baseRev)/eventsummary$baseRev
+print(eventsummary)
+```
+Per summary Table, the incremental sales response for event 1 is 33.60% and for event 2 is 69.33%.
+
+3. Profitability results
+From ROI per event summary, event 5 is the most profitable with a ROI of 53%. Event 2 is the second, with a ROI of 44%. Event 1 does not have a profitable result with the promotion, with a negative ROI of -2%. Event 3, and 4 are even worse with much more negative ROIs of -22% and -79%.
+
+4. The profitability with forward buying
+```{r}
+eventsummary2 = data.frame(incrContr = c(8019, 18874), VC = c(4740, 9674), FC = c(2500, 2500))
+eventsummary2$ForwardBuyCost = c(962*2, 962*2)
+eventsummary2$eventCost = eventsummary2$VC + eventsummary2$FC + eventsummary2$ForwardBuyCost
+eventsummary2$grossContr = eventsummary2$incrContr - eventsummary2$eventCost
+eventsummary2$ROI = eventsummary2$grossContr/eventsummary2$incrContr
+print(eventsummary2)
+```
+The profit for event 1 will be -1145 with a ROI of -14.28% and for event 2 will be 4776 with a ROI of 25.30%.
+
+5. The approaches to calculate ROIs
+The Booz Allen Hamilton (BAH) approach and the one took in class are equally good. The BAH method is more applicable when considering each unit sale, while the one took in class is more generally applicable.
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
