@@ -160,26 +160,148 @@ Consider the following three promotions: \newline
 Calculate the lift factors for each promotion for both accounts, based on the regression estimates in 2. Set estimates that are not statistically significant = 0.
 
 ```{r, fig.width = 6, fig.height = 3, fig.align = "center"}
+lift_factor <- function(model, TPR = 0, DIS = 0, FEA = 0) {
+  alpha  = if(summary(model)$coef[1,4] < 0.1) {summary(model)$coef[1,1]} else {0}
+  
+  beta_lp  = if(summary(model)$coef[2,4] < 0.1) {summary(model)$coef[2,1]} else {0}
+#  print(beta_lp)
+  
+  beta_d  = 
+if(length(summary(model)$coef[,1]) >= 3 ){
+  if(summary(model)$coef[3,4] < 0.1) 
+  {summary(model)$coef[3,1]} else {
+      0}
+} else {
+  0
+}
+#  print(beta_d)
+  
+  beta_f  = 
+if(length(summary(model)$coef[,1]) >= 4 ){
+  if(summary(model)$coef[4,4] < 0.1) 
+  {summary(model)$coef[4,1]} else {
+      0}
+} else {
+  0
+}
 
-D_lm = 
-hellmans_df %>% 
-filter(account == "Dominicks") %>% 
-glm(log(units) ~ log(price), data = .)
-
-summary(D_lm)
-
-J_lm = 
-hellmans_df %>% 
-filter(account == "Jewel") %>% 
-glm(log(units) ~ log(price), data = .)
-
-summary(J_lm)
-
-#Two linear model demand-price graph
-hellmans_df %>% 
-ggplot(data = ., aes(x= log(units), y = log(price), color=account)) + geom_point(size = 1, alpha = 1) +
-  facet_grid(cols = vars(account)) + geom_smooth(method = "lm", se = FALSE)
+  lf = exp(beta_lp*log(1 - TPR) + beta_d*DIS + beta_f*FEA)
+}
 
 
+#(a)
+#For Dominicks
+print(lift_factor(D_d_f_lm, 0.15))
+#For Jewel
+print(lift_factor(J_d_f_lm, 0.15))
 
+#(b)
+#For Dominicks
+print(lift_factor(D_d_f_lm, 0.15, 0.7))
+#For Jewel
+print(lift_factor(J_d_f_lm, 0.15, 0.7))
+
+#(c)
+#For Dominicks
+print(lift_factor(D_d_f_lm, 0.15, 0.7, 1))
+#For Jewel
+print(lift_factor(J_d_f_lm, 0.15, 0.7, 1))
+
+```
+\newpage
+
+## Question 
+Perform an ROI analysis of the three promotions, (a), (b), and (c), separately for the two retail accounts, Dominick’s and Jewel-Osco. The promotions last for one week. Your analysis should follow the approach that we took in class, not the version of this approach taken by Booz Allen Hamilton in the first part of the assignment. \newline
+Note. Perform the analysis using units, not cases of Hellman’s mayo. You will need the following data for your analysis: \newline
+• The regular price of the product at both accounts is $1.20. \newline
+• The VCM for Hellman’s is $0.55 per unit. \newline
+• The manufacturer fully pays for the shelf price reduction. E.g., if the shelf price is reduced from $1.20 to $1.00, the manufacturer pays for this TPR through a $0.20 per unit (off-invoice) allowance. \newline
+• The fixed cost (MDF) for the promotion involving display only is $3,000 at Dominick’s and $5,000 at Jewel-Osco. The fixed cost for the promotion including feature and display is $4,500 at Dominick’s and $6,800 at Jewel-Osco. \newline
+In order to estimate baseline sales, use the regression estimates and the regular price, and predict sales for display and feature = 0. \newline
+Using these data, and the lift factors found in 3, you can then fill in the cells in the blueprint of a spreadsheet below, for each of the three promotions at both accounts. \newline
+Consider both: \newline
+• No stockpiling (purchase acceleration) \newline
+• The case where 20 percent of the incremental units as predicted by the event lift are due to stockpiling (purchase acceleration), and hence not truly incremental \newline
+
+```{r, fig.width = 6, fig.height = 3, fig.align = "center"}
+
+MDF_D_d = 3000
+MDF_J_d = 5000
+MDF_D_d_f = 4500
+MDF_J_d_f = 6800
+
+ROI_Summary <- function(model, TPR = 0, DIS = 0, FEA = 0, fixed_payment_cost = 0, regular_price = 1.2, regular_margin = 0.55, Stockpiling = 0) {
+
+baseline_units = exp(predict(D_d_f_lm, data.frame(price = regular_price, display = 0, feature = 0),
+   type = "response"))
+
+total_units = lift_factor(D_d_f_lm, TPR, DIS, FEA) * baseline_units
+
+incremental_units = (total_units - baseline_units)
+
+incremental_units_Stockpiling = incremental_units * Stockpiling
+
+incremental_units_net = incremental_units - incremental_units_Stockpiling
+
+promoted_price = (1 - TPR)*regular_price
+
+promoted_margine = promoted_price - (regular_price - regular_margin)
+
+incremental_contribution = promoted_margine * incremental_units_net
+  
+variable_cost = TPR * regular_price * baseline_units
+
+event_cost = variable_cost + fixed_payment_cost
+
+gross_contribution = incremental_contribution - event_cost
+
+ROI = gross_contribution/event_cost
+
+list("Baseline units" = baseline_units,
+     "Incremental units" = incremental_units,
+     "Total units" = total_units,
+     "% incremental units purchase acceleration" = Stockpiling,
+     "Incremental units purchase acceleration" = incremental_units_Stockpiling,
+     "Incremental units net of purchase acceleration" = incremental_units_net,
+     "Incremental contribution" = incremental_contribution,
+     "Variable cost" = variable_cost,
+     "Fixed payment cost" = fixed_payment_cost,
+     "Event cost" = event_cost,
+     "Event gross contribution" = gross_contribution,
+     "ROI" = ROI)
+}
+
+
+#For D
+#(a) 
+ROI_Summary(D_d_f_lm, 0.15)
+#(b)
+ROI_Summary(D_d_f_lm, 0.15, 0.7)
+#(c)
+ROI_Summary(D_d_f_lm, 0.15, 0.7, 1)
+
+#Consider stockpiling is 20%
+#(a) 
+ROI_Summary(D_d_f_lm, 0.15, Stockpiling = 0.2)
+#(b)
+ROI_Summary(D_d_f_lm, 0.15, 0.7, Stockpiling = 0.2)
+#(c)
+ROI_Summary(D_d_f_lm, 0.15, 0.7, 1, Stockpiling = 0.2)
+
+
+#For Jewel
+#(a) 
+ROI_Summary(J_d_f_lm, 0.15)
+#(b)
+ROI_Summary(J_d_f_lm, 0.15, 0.7)
+#(c)
+ROI_Summary(J_d_f_lm, 0.15, 0.7, 1)
+
+#Consider stockpiling is 20%
+#(a) 
+ROI_Summary(J_d_f_lm, 0.15, Stockpiling = 0.2)
+#(b)
+ROI_Summary(J_d_f_lm, 0.15, 0.7, Stockpiling = 0.2)
+#(c)
+ROI_Summary(J_d_f_lm, 0.15, 0.7, 1, Stockpiling = 0.2)
 ```
