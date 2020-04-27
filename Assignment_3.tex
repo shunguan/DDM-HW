@@ -1,0 +1,1116 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={Assignment 3: Promotions Management},
+            pdfauthor={Group 11: Christina Wang, Kailin Fu, Shun Guan, Sylvia Lu, Yiran Huang},
+            colorlinks=true,
+            linkcolor=Maroon,
+            filecolor=Maroon,
+            citecolor=Blue,
+            urlcolor=blue,
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\title{Assignment 3: Promotions Management}
+\author{Group 11: Christina Wang, Kailin Fu, Shun Guan, Sylvia Lu, Yiran Huang}
+\date{April 20, 2020}
+
+\begin{document}
+\maketitle
+
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\setlength{\parskip}{6pt}
+\newpage
+
+\hypertarget{promotional-event-planning}{%
+\section{Promotional event planning}\label{promotional-event-planning}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Evidence for strong seasonal demand There is a strong seasonal demand
+  for this product. Per event summary, the product has a much higher
+  demand around the time of event 2. The base case for event 2 is 1,360,
+  a 87\% increase from event 1, a 469\% increase from event 3, a 203\%
+  increase from event 4, and a 308\% increase from event 5. Similarly,
+  the base demand around event 1 is also higher than other events except
+  event 2. The higher base demands around the time of event 2 and event
+  1 show a strong seasonal demand.
+\item
+  Incremental sales response
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eventsummary =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{baseQ =} \KeywordTok{c}\NormalTok{(}\DecValTok{728}\NormalTok{, }\DecValTok{1360}\NormalTok{), }\DataTypeTok{baseP =} \KeywordTok{c}\NormalTok{(}\FloatTok{2.31}\NormalTok{, }\FloatTok{2.31}\NormalTok{), }\DataTypeTok{promoQ =} \KeywordTok{c}\NormalTok{(}\DecValTok{1129}\NormalTok{, }\DecValTok{2303}\NormalTok{), }\DataTypeTok{promoP =} \KeywordTok{c}\NormalTok{(}\FloatTok{1.99}\NormalTok{, }\FloatTok{2.31}\NormalTok{))}
+\NormalTok{eventsummary}\OperatorTok{$}\NormalTok{baseRev =}\StringTok{ }\NormalTok{eventsummary}\OperatorTok{$}\NormalTok{baseQ}\OperatorTok{*}\NormalTok{eventsummary}\OperatorTok{$}\NormalTok{baseP}
+\NormalTok{eventsummary}\OperatorTok{$}\NormalTok{promoRev =}\StringTok{ }\NormalTok{eventsummary}\OperatorTok{$}\NormalTok{promoQ}\OperatorTok{*}\NormalTok{eventsummary}\OperatorTok{$}\NormalTok{promoP}
+\NormalTok{eventsummary}\OperatorTok{$}\NormalTok{incrRevFrac =}\StringTok{ }\NormalTok{(eventsummary}\OperatorTok{$}\NormalTok{promoRev }\OperatorTok{-}\StringTok{ }\NormalTok{eventsummary}\OperatorTok{$}\NormalTok{baseRev)}\OperatorTok{/}\NormalTok{eventsummary}\OperatorTok{$}\NormalTok{baseRev}
+\KeywordTok{print}\NormalTok{(eventsummary)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  baseQ baseP promoQ promoP baseRev promoRev incrRevFrac
+1   728  2.31   1129   1.99 1681.68  2246.71   0.3359914
+2  1360  2.31   2303   2.31 3141.60  5319.93   0.6933824
+\end{verbatim}
+
+Per summary Table, the incremental sales response for event 1 is 33.60\%
+and for event 2 is 69.33\%.
+
+\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}
+HEAD 3. Profitability results From ROI per event summary, event 5 is the
+most profitable with a ROI of 53\%. Event 2 is the second, with a ROI of
+44\%. Event 1 does not have a profitable result with the promotion, with
+a negative ROI of -2\%. Event 3, and 4 are even worse with much more
+negative ROIs of -22\% and -79\%.
+
+=======
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Profitability results From ROI per event summary, event 5 is the most
+  profitable with a ROI of 53\%. Event 2 is the second, with a ROI of
+  44\%. Event 1 does not have a profitable result with the promotion,
+  with a negative ROI of -2\%. Event 3, and 4 are even worse with much
+  more negative ROIs of -22\% and -79\%.
+\end{enumerate}
+
+Comparing Event 4 and Event 5, ROI ranges from -79\% to 53\%,
+essentially the percentage of display and the degree of price discount
+have a significant impact on final ROI. Comparing Event 3 and Event 5,
+Display tends to be more effective than feature. An effective promotion
+should generate high percentage of incremental sales compared to the
+baseline sales. The foregone cash flow or opportunity cost of carrying a
+price reduction promotion should not be greater than the additional
+revenue brought in by the promotion. For example, Event 5 occured in
+slow demand season whose baseline sales were low (333). So for giving up
+the opportunity cost of 333 x \$4.2 = \$1399, the promotion earned
+additional revenue from 602 x \$(20-4.2) = \$9512, and is hence a
+successful campaign.
+
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+upstream/master 4. The profitability with forward buying
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eventsummary2 =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{incrContr =} \KeywordTok{c}\NormalTok{(}\DecValTok{8019}\NormalTok{, }\DecValTok{18874}\NormalTok{), }\DataTypeTok{VC =} \KeywordTok{c}\NormalTok{(}\DecValTok{4740}\NormalTok{, }\DecValTok{9674}\NormalTok{), }\DataTypeTok{FC =} \KeywordTok{c}\NormalTok{(}\DecValTok{2500}\NormalTok{, }\DecValTok{2500}\NormalTok{))}
+\NormalTok{eventsummary2}\OperatorTok{$}\NormalTok{ForwardBuyCost =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{962}\OperatorTok{*}\DecValTok{2}\NormalTok{, }\DecValTok{962}\OperatorTok{*}\DecValTok{2}\NormalTok{)}
+\NormalTok{eventsummary2}\OperatorTok{$}\NormalTok{eventCost =}\StringTok{ }\NormalTok{eventsummary2}\OperatorTok{$}\NormalTok{VC }\OperatorTok{+}\StringTok{ }\NormalTok{eventsummary2}\OperatorTok{$}\NormalTok{FC }\OperatorTok{+}\StringTok{ }\NormalTok{eventsummary2}\OperatorTok{$}\NormalTok{ForwardBuyCost}
+\NormalTok{eventsummary2}\OperatorTok{$}\NormalTok{grossContr =}\StringTok{ }\NormalTok{eventsummary2}\OperatorTok{$}\NormalTok{incrContr }\OperatorTok{-}\StringTok{ }\NormalTok{eventsummary2}\OperatorTok{$}\NormalTok{eventCost}
+\NormalTok{eventsummary2}\OperatorTok{$}\NormalTok{ROI =}\StringTok{ }\NormalTok{eventsummary2}\OperatorTok{$}\NormalTok{grossContr}\OperatorTok{/}\NormalTok{eventsummary2}\OperatorTok{$}\NormalTok{incrContr}
+\KeywordTok{print}\NormalTok{(eventsummary2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  incrContr   VC   FC ForwardBuyCost eventCost grossContr        ROI
+1      8019 4740 2500           1924      9164      -1145 -0.1427859
+2     18874 9674 2500           1924     14098       4776  0.2530465
+\end{verbatim}
+
+The profit for event 1 will be -1145 with a ROI of -14.28\% and for
+event 2 will be 4776 with a ROI of 25.30\%.
+
+\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}
+HEAD 5. The approaches to calculate ROIs The Booz Allen Hamilton (BAH)
+approach and the one took in class are equally good. The BAH method is
+more applicable when considering each unit sale, while the one took in
+class is more generally applicable. ======= Kailin: -12\% and 34\%
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  The approaches to calculate ROIs The Booz Allen Hamilton (BAH)
+  approach and the one took in class are equally good. The BAH method
+  includes both the baseline consumption as well as the incremental
+  sales volume when calculating variable costs, this implies the
+  assumption that during planning the promotion event is part of the
+  total consideration. While the method we discussed in class compares
+  ``with the event'' and ``without the event'' two scenarios and
+  therefore only take into account the baseline consumption in the
+  variable costs to account for the ``foregone cash flow'' or
+  opportunity cost. For example in question 3, using the method from
+  lecture can quickly tell us if a promotion is worth carrying out or
+  not. Depends on the focus of the study, the BAH method is more
+  applicable when considering each unit sale, while the one took in
+  class is more generally applicable.
+  \textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}
+  upstream/master
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(cars)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     speed           dist       
+ Min.   : 4.0   Min.   :  2.00  
+ 1st Qu.:12.0   1st Qu.: 26.00  
+ Median :15.0   Median : 36.00  
+ Mean   :15.4   Mean   : 42.98  
+ 3rd Qu.:19.0   3rd Qu.: 56.00  
+ Max.   :25.0   Max.   :120.00  
+\end{verbatim}
+
+\hypertarget{including-plots}{%
+\subsection{Including Plots}\label{including-plots}}
+
+You can also embed plots, for example:
+
+\begin{flushright}\includegraphics{Assignment_3_files/figure-latex/pressure-1} \end{flushright}
+
+Note that the \texttt{echo\ =\ FALSE} parameter was added to the code
+chunk to prevent printing of the R code that generated the plot.
+\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}
+HEAD
+
+=======
+\textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}
+upstream/master \newpage
+
+\hypertarget{estimating-lift-factors-and-promotion-roi-analysis}{%
+\section{Estimating lift factors and promotion ROI
+analysis}\label{estimating-lift-factors-and-promotion-roi-analysis}}
+
+In this part of the assignment, we analyze the effectiveness and ROI of
+different promotions for Hellman's 32 oz Mayonnaise. The analysis is
+based on account level data at Jewel-Osco and Dominick's Finer Foods in
+Chicago. Use the table (data frame) hellmans\_df in the file
+Hellmans.RData. hellmans\_DF contains the following variables: \newline
+• account \newline • product \newline • week \newline • units \newline •
+dollars \newline • feature\_pctacv \newline • display\_pctacv \newline
+
+\medskip
+
+\hypertarget{question-1}{%
+\subsection{Question 1}\label{question-1}}
+
+Create a price variable for Hellman's 32oz mayo. Then, although not
+strictly necessary (because the estimated coefficients will scale in a
+linear regression), you should divide the feature and display columns
+(variables) by 100. Examine the feature and display variables. Provide
+summary statistics (number of observations, mean, standard deviation)
+and histograms of these variables, separately for both accounts. To what
+extent do these two promotional instruments differ? Calculate the
+correlations between feature\_pctacv, display\_pctacv, and price (use
+the cor function in R). Comment on your findings. Do the correlations
+indicate a potential problem for your regression analysis to be
+performed below?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hellmans_df}\OperatorTok{$}\NormalTok{price =}\StringTok{ }\NormalTok{hellmans_df}\OperatorTok{$}\NormalTok{dollars }\OperatorTok{/}\StringTok{ }\NormalTok{hellmans_df}\OperatorTok{$}\NormalTok{units}
+\NormalTok{hellmans_df}\OperatorTok{$}\NormalTok{feature =}\StringTok{ }\NormalTok{hellmans_df}\OperatorTok{$}\NormalTok{feature_pctacv }\OperatorTok{/}\StringTok{ }\DecValTok{100}
+\NormalTok{hellmans_df}\OperatorTok{$}\NormalTok{display =}\StringTok{ }\NormalTok{hellmans_df}\OperatorTok{$}\NormalTok{display_pctacv }\OperatorTok{/}\StringTok{ }\DecValTok{100}
+
+\NormalTok{my_summary <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(df, account) \{}
+\NormalTok{  df_local =}\StringTok{ }\NormalTok{df[df}\OperatorTok{$}\NormalTok{account }\OperatorTok{==}\StringTok{ }\NormalTok{account,]}
+    \KeywordTok{list}\NormalTok{(}\StringTok{"Feature Summary"}\NormalTok{ =}\StringTok{ }
+\StringTok{       }\KeywordTok{list}\NormalTok{(}\StringTok{"count"}\NormalTok{ =}\StringTok{ }\KeywordTok{length}\NormalTok{(df_local}\OperatorTok{$}\NormalTok{feature),}
+            \StringTok{"mean"}\NormalTok{ =}\StringTok{ }\KeywordTok{mean}\NormalTok{(df_local}\OperatorTok{$}\NormalTok{feature),}
+            \StringTok{"sd"}\NormalTok{ =}\StringTok{ }\KeywordTok{sd}\NormalTok{(df_local}\OperatorTok{$}\NormalTok{feature)),}
+       \StringTok{"Display Summary"}\NormalTok{ =}\StringTok{ }
+\StringTok{       }\KeywordTok{list}\NormalTok{(}\StringTok{"count"}\NormalTok{ =}\StringTok{ }\KeywordTok{length}\NormalTok{(df_local}\OperatorTok{$}\NormalTok{display),}
+            \StringTok{"mean"}\NormalTok{ =}\StringTok{ }\KeywordTok{mean}\NormalTok{(df_local}\OperatorTok{$}\NormalTok{display),}
+            \StringTok{"sd"}\NormalTok{ =}\StringTok{ }\KeywordTok{sd}\NormalTok{(df_local}\OperatorTok{$}\NormalTok{display)))}
+\NormalTok{\}}
+
+\NormalTok{D_summary =}\StringTok{ }\KeywordTok{my_summary}\NormalTok{(hellmans_df, }\StringTok{"Dominicks"}\NormalTok{)}
+\NormalTok{J_summary =}\StringTok{ }\KeywordTok{my_summary}\NormalTok{(hellmans_df, }\StringTok{"Jewel"}\NormalTok{)}
+\KeywordTok{print}\NormalTok{(D_summary)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+$`Feature Summary`
+$`Feature Summary`$count
+[1] 88
+
+$`Feature Summary`$mean
+[1] 0.1363636
+
+$`Feature Summary`$sd
+[1] 0.3451409
+
+
+$`Display Summary`
+$`Display Summary`$count
+[1] 88
+
+$`Display Summary`$mean
+[1] 0.1206818
+
+$`Display Summary`$sd
+[1] 0.1762952
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(J_summary)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+$`Feature Summary`
+$`Feature Summary`$count
+[1] 88
+
+$`Feature Summary`$mean
+[1] 0.1794318
+
+$`Feature Summary`$sd
+[1] 0.3834338
+
+
+$`Display Summary`
+$`Display Summary`$count
+[1] 88
+
+$`Display Summary`$mean
+[1] 0.2298864
+
+$`Display Summary`$sd
+[1] 0.2581655
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hellmans_df }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ ., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{feature, }\DataTypeTok{color=}\NormalTok{account)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{fill=}\StringTok{"white"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{facet_grid}\NormalTok{(}\DataTypeTok{cols =} \KeywordTok{vars}\NormalTok{(account))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{Assignment_3_files/figure-latex/unnamed-chunk-4-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hellmans_df }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ ., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{display, }\DataTypeTok{color=}\NormalTok{account)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_histogram}\NormalTok{(}\DataTypeTok{fill=}\StringTok{"white"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{facet_grid}\NormalTok{(}\DataTypeTok{cols =} \KeywordTok{vars}\NormalTok{(account))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{Assignment_3_files/figure-latex/unnamed-chunk-4-2} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Correlations}
+\KeywordTok{cor}\NormalTok{(hellmans_df}\OperatorTok{$}\NormalTok{feature_pctacv, hellmans_df}\OperatorTok{$}\NormalTok{display_pctacv)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.7599992
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cor}\NormalTok{(hellmans_df}\OperatorTok{$}\NormalTok{feature_pctacv, hellmans_df}\OperatorTok{$}\NormalTok{price)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] -0.5747241
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cor}\NormalTok{(hellmans_df}\OperatorTok{$}\NormalTok{display_pctacv, hellmans_df}\OperatorTok{$}\NormalTok{price)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] -0.6700056
+\end{verbatim}
+
+\hypertarget{head}{%
+\section{\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}
+HEAD}\label{head}}
+
+For \% of stores featuring the product, the value is either 0 or 100\%.
+This indicates either all stores under the same brand features at the
+same time, or they all don't feature at the same time. For display, the
+percentage of stores displaying the product vary over time and usually
+not all of them display at the same time. And based on the analysis,
+Jewel puts on display more often on a higher percentage versus
+Dominick's. Feature and Display correlate positively, which means when
+featuring happens, it's likely to be coupled by display. Price
+correlates negatively with both Feature and Display, which indicates a
+price reduction will happen when the product is in display or being
+featured. It could be a potential problem for our regression analysis if
+we only consider Price as the independent variable; therefore we need to
+carefully handle Feature and Display as variables when we build the
+regression model.
+
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+upstream/master
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+
+\newpage
+
+\hypertarget{question-2}{%
+\subsection{Question 2}\label{question-2}}
+
+Estimate the log-linear demand model separately for each account, using
+price as the only explanatory variable. Then add the feature and display
+variables. Comment on the difference between the two regressions in
+terms of goodness of fit, and the price elasticity estimates. Is the
+change in price elasticity estimates as expected? What is the reason for
+this change? Are the coefficient estimates similar for both accounts?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{D_lm =}\StringTok{ }
+\NormalTok{hellmans_df }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{filter}\NormalTok{(account }\OperatorTok{==}\StringTok{ "Dominicks"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{glm}\NormalTok{(}\KeywordTok{log}\NormalTok{(units) }\OperatorTok{~}\StringTok{ }\KeywordTok{log}\NormalTok{(price), }\DataTypeTok{data =}\NormalTok{ .)}
+
+\KeywordTok{summary}\NormalTok{(D_lm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+glm(formula = log(units) ~ log(price), data = .)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-0.63760  -0.17214  -0.01628   0.10558   0.79349  
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  10.0368     0.0719  139.60  < 2e-16 ***
+log(price)   -4.1665     0.4107  -10.15  2.3e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 0.06617719)
+
+    Null deviance: 12.5037  on 87  degrees of freedom
+Residual deviance:  5.6912  on 86  degrees of freedom
+AIC: 14.753
+
+Number of Fisher Scoring iterations: 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{J_lm =}\StringTok{ }
+\NormalTok{hellmans_df }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{filter}\NormalTok{(account }\OperatorTok{==}\StringTok{ "Jewel"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{glm}\NormalTok{(}\KeywordTok{log}\NormalTok{(units) }\OperatorTok{~}\StringTok{ }\KeywordTok{log}\NormalTok{(price), }\DataTypeTok{data =}\NormalTok{ .)}
+
+\KeywordTok{summary}\NormalTok{(J_lm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+glm(formula = log(units) ~ log(price), data = .)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-0.59230  -0.16883  -0.03486   0.15152   0.81131  
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 10.60443    0.05259  201.66   <2e-16 ***
+log(price)  -4.58359    0.42660  -10.74   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 0.06161774)
+
+    Null deviance: 12.4124  on 87  degrees of freedom
+Residual deviance:  5.2991  on 86  degrees of freedom
+AIC: 8.4712
+
+Number of Fisher Scoring iterations: 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Two linear model demand-price graph}
+\NormalTok{hellmans_df }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ ., }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=} \KeywordTok{log}\NormalTok{(units), }\DataTypeTok{y =} \KeywordTok{log}\NormalTok{(price), }\DataTypeTok{color=}\NormalTok{account)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{size =} \DecValTok{1}\NormalTok{, }\DataTypeTok{alpha =} \DecValTok{1}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_grid}\NormalTok{(}\DataTypeTok{cols =} \KeywordTok{vars}\NormalTok{(account)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{, }\DataTypeTok{se =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{Assignment_3_files/figure-latex/unnamed-chunk-5-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Compare with the feature add model}
+
+\NormalTok{D_d_lm =}\StringTok{ }
+\NormalTok{hellmans_df }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{filter}\NormalTok{(account }\OperatorTok{==}\StringTok{ "Dominicks"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{glm}\NormalTok{(}\KeywordTok{log}\NormalTok{(units) }\OperatorTok{~}\StringTok{ }\KeywordTok{log}\NormalTok{(price) }\OperatorTok{+}\StringTok{ }\NormalTok{display, }\DataTypeTok{data =}\NormalTok{ .)}
+\KeywordTok{summary}\NormalTok{(D_d_lm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+glm(formula = log(units) ~ log(price) + display, data = .)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-0.43297  -0.14369  -0.02460   0.09584   0.59909  
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  9.61572    0.08888 108.190  < 2e-16 ***
+log(price)  -2.36500    0.44187  -5.352 7.25e-07 ***
+display      1.07331    0.16833   6.376 9.04e-09 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 0.04529276)
+
+    Null deviance: 12.5037  on 87  degrees of freedom
+Residual deviance:  3.8499  on 85  degrees of freedom
+AIC: -17.645
+
+Number of Fisher Scoring iterations: 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{J_d_lm =}\StringTok{ }
+\NormalTok{hellmans_df }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{filter}\NormalTok{(account }\OperatorTok{==}\StringTok{ "Jewel"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{glm}\NormalTok{(}\KeywordTok{log}\NormalTok{(units) }\OperatorTok{~}\StringTok{ }\KeywordTok{log}\NormalTok{(price) }\OperatorTok{+}\StringTok{ }\NormalTok{display, }\DataTypeTok{data =}\NormalTok{ .)}
+\KeywordTok{summary}\NormalTok{(J_d_lm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+glm(formula = log(units) ~ log(price) + display, data = .)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-0.36125  -0.10576  -0.03313   0.09383   0.51352  
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 10.09791    0.06263 161.233  < 2e-16 ***
+log(price)  -1.89014    0.39966  -4.729 8.86e-06 ***
+display      0.95534    0.09657   9.892 8.47e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 0.02897969)
+
+    Null deviance: 12.4124  on 87  degrees of freedom
+Residual deviance:  2.4633  on 85  degrees of freedom
+AIC: -56.941
+
+Number of Fisher Scoring iterations: 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{D_d_f_lm =}\StringTok{ }
+\NormalTok{hellmans_df }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{filter}\NormalTok{(account }\OperatorTok{==}\StringTok{ "Dominicks"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{glm}\NormalTok{(}\KeywordTok{log}\NormalTok{(units) }\OperatorTok{~}\StringTok{ }\KeywordTok{log}\NormalTok{(price) }\OperatorTok{+}\StringTok{ }\NormalTok{display }\OperatorTok{+}\StringTok{ }\NormalTok{feature, }\DataTypeTok{data =}\NormalTok{ .)}
+\KeywordTok{summary}\NormalTok{(D_d_f_lm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+glm(formula = log(units) ~ log(price) + display + feature, data = .)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-0.34144  -0.13771  -0.02137   0.11067   0.61078  
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  9.52123    0.08944 106.451  < 2e-16 ***
+log(price)  -1.84318    0.45032  -4.093 9.74e-05 ***
+display      0.83410    0.17653   4.725 9.14e-06 ***
+feature      0.28531    0.08925   3.197  0.00196 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 0.04086078)
+
+    Null deviance: 12.5037  on 87  degrees of freedom
+Residual deviance:  3.4323  on 84  degrees of freedom
+AIC: -25.748
+
+Number of Fisher Scoring iterations: 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{J_d_f_lm =}\StringTok{ }
+\NormalTok{hellmans_df }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{filter}\NormalTok{(account }\OperatorTok{==}\StringTok{ "Jewel"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\KeywordTok{glm}\NormalTok{(}\KeywordTok{log}\NormalTok{(units) }\OperatorTok{~}\StringTok{ }\KeywordTok{log}\NormalTok{(price) }\OperatorTok{+}\StringTok{ }\NormalTok{display }\OperatorTok{+}\StringTok{ }\NormalTok{feature, }\DataTypeTok{data =}\NormalTok{ .)}
+\KeywordTok{summary}\NormalTok{(J_d_f_lm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+glm(formula = log(units) ~ log(price) + display + feature, data = .)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-0.36769  -0.12020  -0.02219   0.08526   0.49093  
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 10.08881    0.06327 159.450  < 2e-16 ***
+log(price)  -1.89735    0.39969  -4.747 8.39e-06 ***
+display      1.06947    0.14891   7.182 2.56e-10 ***
+feature     -0.09124    0.09062  -1.007    0.317    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 0.02897501)
+
+    Null deviance: 12.4124  on 87  degrees of freedom
+Residual deviance:  2.4339  on 84  degrees of freedom
+AIC: -55.997
+
+Number of Fisher Scoring iterations: 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# add display improve the model, reduce deviance. However, add feature just improve it a little bit, since feature and display has high correlation. The elastict drop from 4.5 to 1.8 to 1.1 around for both account. We can consider display and feature are ommited variables for the first model.}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{head-1}{%
+\section{\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}
+HEAD}\label{head-1}}
+
+Adding Feature and Display into the regression model reduced the
+coefficient for Price (from -4.1665 to -1.8432 for Dominick's and from
+--4.58359 to -1.89735 for Jewel). This is in line with our expectation
+because in part 1 we noticed Price and Display and Feature are
+negatively correlated, so the two variables' effect was all attributed
+to Price when we only used Price as the independent variable. In other
+words, if we only use Price as a dependent variable, then all sales
+change will be attributed to the change in price. But when we include
+both Display and Feature, the impact of display and feature is then
+valuated separately, i.e.~when feature or display happens price is
+usually discounted at the same time, so the coefficient of price
+decreases.
+\textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}
+upstream/master
+
+\newpage
+
+\hypertarget{question-3}{%
+\subsection{Question 3}\label{question-3}}
+
+Consider the following three promotions: \newline (a) 15\% TPR \newline
+(b) 15\% TPR, 70\% display \newline (c) 15\% TPR, 70\% display, 100\%
+feature \newline Calculate the lift factors for each promotion for both
+accounts, based on the regression estimates in 2. Set estimates that are
+not statistically significant = 0.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lift_factor <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(model, }\DataTypeTok{TPR =} \DecValTok{0}\NormalTok{, }\DataTypeTok{DIS =} \DecValTok{0}\NormalTok{, }\DataTypeTok{FEA =} \DecValTok{0}\NormalTok{) \{}
+\NormalTok{  alpha  =}\StringTok{ }\ControlFlowTok{if}\NormalTok{(}\KeywordTok{summary}\NormalTok{(model)}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{] }\OperatorTok{<}\StringTok{ }\FloatTok{0.1}\NormalTok{) \{}\KeywordTok{summary}\NormalTok{(model)}\OperatorTok{$}\NormalTok{coef[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]\} }\ControlFlowTok{else}\NormalTok{ \{}\DecValTok{0}\NormalTok{\}}
+  
+\NormalTok{  beta_lp  =}\StringTok{ }\ControlFlowTok{if}\NormalTok{(}\KeywordTok{summary}\NormalTok{(model)}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{] }\OperatorTok{<}\StringTok{ }\FloatTok{0.1}\NormalTok{) \{}\KeywordTok{summary}\NormalTok{(model)}\OperatorTok{$}\NormalTok{coef[}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{]\} }\ControlFlowTok{else}\NormalTok{ \{}\DecValTok{0}\NormalTok{\}}
+\CommentTok{#  print(beta_lp)}
+  
+\NormalTok{  beta_d  =}\StringTok{ }
+\ControlFlowTok{if}\NormalTok{(}\KeywordTok{length}\NormalTok{(}\KeywordTok{summary}\NormalTok{(model)}\OperatorTok{$}\NormalTok{coef[,}\DecValTok{1}\NormalTok{]) }\OperatorTok{>=}\StringTok{ }\DecValTok{3}\NormalTok{ )\{}
+  \ControlFlowTok{if}\NormalTok{(}\KeywordTok{summary}\NormalTok{(model)}\OperatorTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{] }\OperatorTok{<}\StringTok{ }\FloatTok{0.1}\NormalTok{) }
+\NormalTok{  \{}\KeywordTok{summary}\NormalTok{(model)}\OperatorTok{$}\NormalTok{coef[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{]\} }\ControlFlowTok{else}\NormalTok{ \{}
+      \DecValTok{0}\NormalTok{\}}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \DecValTok{0}
+\NormalTok{\}}
+\CommentTok{#  print(beta_d)}
+  
+\NormalTok{  beta_f  =}\StringTok{ }
+\ControlFlowTok{if}\NormalTok{(}\KeywordTok{length}\NormalTok{(}\KeywordTok{summary}\NormalTok{(model)}\OperatorTok{$}\NormalTok{coef[,}\DecValTok{1}\NormalTok{]) }\OperatorTok{>=}\StringTok{ }\DecValTok{4}\NormalTok{ )\{}
+  \ControlFlowTok{if}\NormalTok{(}\KeywordTok{summary}\NormalTok{(model)}\OperatorTok{$}\NormalTok{coef[}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{] }\OperatorTok{<}\StringTok{ }\FloatTok{0.1}\NormalTok{) }
+\NormalTok{  \{}\KeywordTok{summary}\NormalTok{(model)}\OperatorTok{$}\NormalTok{coef[}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{]\} }\ControlFlowTok{else}\NormalTok{ \{}
+      \DecValTok{0}\NormalTok{\}}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \DecValTok{0}
+\NormalTok{\}}
+
+\NormalTok{  lf =}\StringTok{ }\KeywordTok{exp}\NormalTok{(beta_lp}\OperatorTok{*}\KeywordTok{log}\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{TPR) }\OperatorTok{+}\StringTok{ }\NormalTok{beta_d}\OperatorTok{*}\NormalTok{DIS }\OperatorTok{+}\StringTok{ }\NormalTok{beta_f}\OperatorTok{*}\NormalTok{FEA)}
+\NormalTok{\}}
+
+
+\CommentTok{#(a)}
+\CommentTok{#For Dominicks}
+\KeywordTok{print}\NormalTok{(}\KeywordTok{lift_factor}\NormalTok{(D_d_f_lm, }\FloatTok{0.15}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1.349254
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#For Jewel}
+\KeywordTok{print}\NormalTok{(}\KeywordTok{lift_factor}\NormalTok{(J_d_f_lm, }\FloatTok{0.15}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1.361185
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#(b)}
+\CommentTok{#For Dominicks}
+\KeywordTok{print}\NormalTok{(}\KeywordTok{lift_factor}\NormalTok{(D_d_f_lm, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.7}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 2.419158
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#For Jewel}
+\KeywordTok{print}\NormalTok{(}\KeywordTok{lift_factor}\NormalTok{(J_d_f_lm, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.7}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 2.877672
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#(c)}
+\CommentTok{#For Dominicks}
+\KeywordTok{print}\NormalTok{(}\KeywordTok{lift_factor}\NormalTok{(D_d_f_lm, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 3.217896
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#For Jewel}
+\KeywordTok{print}\NormalTok{(}\KeywordTok{lift_factor}\NormalTok{(J_d_f_lm, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 2.877672
+\end{verbatim}
+
+\hypertarget{head-2}{%
+\section{\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}
+HEAD}\label{head-2}}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Lift Factor for Donimick's: 1.349254; Lift Factor for Jewel's:
+  1.361185;
+\item
+  Lift Factor for Donimick's: 2.419158; Lift Factor for Jewel's:
+  2.87767;
+\item
+  Lift Factor for Donimick's: 3.217896; Lift Factor for Jewel's:
+  2.877672;
+\end{enumerate}
+
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+\begin{quote}
+upstream/master \newpage
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+\end{quote}
+
+\hypertarget{question-4}{%
+\subsection{Question 4}\label{question-4}}
+
+Perform an ROI analysis of the three promotions, (a), (b), and (c),
+separately for the two retail accounts, Dominick's and Jewel-Osco. The
+promotions last for one week. Your analysis should follow the approach
+that we took in class, not the version of this approach taken by Booz
+Allen Hamilton in the first part of the assignment. \newline Note.
+Perform the analysis using units, not cases of Hellman's mayo. You will
+need the following data for your analysis: \newline • The regular price
+of the product at both accounts is \$1.20. \newline • The VCM for
+Hellman's is \$0.55 per unit. \newline • The manufacturer fully pays for
+the shelf price reduction. E.g., if the shelf price is reduced from
+\$1.20 to \$1.00, the manufacturer pays for this TPR through a \$0.20
+per unit (off-invoice) allowance. \newline • The fixed cost (MDF) for
+the promotion involving display only is \$3,000 at Dominick's and
+\$5,000 at Jewel-Osco. The fixed cost for the promotion including
+feature and display is \$4,500 at Dominick's and \$6,800 at Jewel-Osco.
+\newline In order to estimate baseline sales, use the regression
+estimates and the regular price, and predict sales for display and
+feature = 0. \newline Using these data, and the lift factors found in 3,
+you can then fill in the cells in the blueprint of a spreadsheet below,
+for each of the three promotions at both accounts. \newline Consider
+both: \newline • No stockpiling (purchase acceleration) \newline • The
+case where 20 percent of the incremental units as predicted by the event
+lift are due to stockpiling (purchase acceleration), and hence not truly
+incremental \newline
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ROI_Summary <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(model, }\DataTypeTok{TPR =} \DecValTok{0}\NormalTok{, }\DataTypeTok{DIS =} \DecValTok{0}\NormalTok{, }\DataTypeTok{FEA =} \DecValTok{0}\NormalTok{, }\DataTypeTok{fixed_payment_cost =} \DecValTok{0}\NormalTok{, }\DataTypeTok{regular_price =} \FloatTok{1.2}\NormalTok{, }\DataTypeTok{regular_margin =} \FloatTok{0.55}\NormalTok{, }\DataTypeTok{Stockpiling =} \DecValTok{0}\NormalTok{) \{}
+
+\NormalTok{baseline_units =}\StringTok{ }\KeywordTok{exp}\NormalTok{(}\KeywordTok{predict}\NormalTok{(D_d_f_lm, }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{price =}\NormalTok{ regular_price, }\DataTypeTok{display =} \DecValTok{0}\NormalTok{, }\DataTypeTok{feature =} \DecValTok{0}\NormalTok{),}
+   \DataTypeTok{type =} \StringTok{"response"}\NormalTok{))}
+
+\NormalTok{total_units =}\StringTok{ }\KeywordTok{lift_factor}\NormalTok{(D_d_f_lm, TPR, DIS, FEA) }\OperatorTok{*}\StringTok{ }\NormalTok{baseline_units}
+
+\NormalTok{incremental_units =}\StringTok{ }\NormalTok{(total_units }\OperatorTok{-}\StringTok{ }\NormalTok{baseline_units)}
+
+\NormalTok{incremental_units_Stockpiling =}\StringTok{ }\NormalTok{incremental_units }\OperatorTok{*}\StringTok{ }\NormalTok{Stockpiling}
+
+\NormalTok{incremental_units_net =}\StringTok{ }\NormalTok{incremental_units }\OperatorTok{-}\StringTok{ }\NormalTok{incremental_units_Stockpiling}
+
+\NormalTok{promoted_price =}\StringTok{ }\NormalTok{(}\DecValTok{1} \OperatorTok{-}\StringTok{ }\NormalTok{TPR)}\OperatorTok{*}\NormalTok{regular_price}
+
+\NormalTok{promoted_margine =}\StringTok{ }\NormalTok{promoted_price }\OperatorTok{-}\StringTok{ }\NormalTok{(regular_price }\OperatorTok{-}\StringTok{ }\NormalTok{regular_margin)}
+
+\NormalTok{incremental_contribution =}\StringTok{ }\NormalTok{promoted_margine }\OperatorTok{*}\StringTok{ }\NormalTok{incremental_units_net}
+  
+\NormalTok{variable_cost =}\StringTok{ }\NormalTok{TPR }\OperatorTok{*}\StringTok{ }\NormalTok{regular_price }\OperatorTok{*}\StringTok{ }\NormalTok{baseline_units}
+
+\NormalTok{event_cost =}\StringTok{ }\NormalTok{variable_cost }\OperatorTok{+}\StringTok{ }\NormalTok{fixed_payment_cost}
+
+\NormalTok{gross_contribution =}\StringTok{ }\NormalTok{incremental_contribution }\OperatorTok{-}\StringTok{ }\NormalTok{event_cost}
+
+\NormalTok{ROI =}\StringTok{ }\NormalTok{gross_contribution}\OperatorTok{/}\NormalTok{event_cost}
+
+\KeywordTok{list}\NormalTok{(}\StringTok{"Baseline units"}\NormalTok{ =}\StringTok{ }\NormalTok{baseline_units,}
+     \StringTok{"Incremental units"}\NormalTok{ =}\StringTok{ }\NormalTok{incremental_units,}
+     \StringTok{"Total units"}\NormalTok{ =}\StringTok{ }\NormalTok{total_units,}
+     \StringTok{"Precent with pa"}\NormalTok{ =}\StringTok{ }\NormalTok{Stockpiling,}
+     \StringTok{"Incremental units with pa"}\NormalTok{ =}\StringTok{ }\NormalTok{incremental_units_Stockpiling,}
+     \StringTok{"Incremental units net"}\NormalTok{ =}\StringTok{ }\NormalTok{incremental_units_net,}
+     \StringTok{"Incremental contribution"}\NormalTok{ =}\StringTok{ }\NormalTok{incremental_contribution,}
+     \StringTok{"Variable cost"}\NormalTok{ =}\StringTok{ }\NormalTok{variable_cost,}
+     \StringTok{"Fixed payment cost"}\NormalTok{ =}\StringTok{ }\NormalTok{fixed_payment_cost,}
+     \StringTok{"Event cost"}\NormalTok{ =}\StringTok{ }\NormalTok{event_cost,}
+     \StringTok{"Event gross contribution"}\NormalTok{ =}\StringTok{ }\NormalTok{gross_contribution,}
+     \StringTok{"ROI"}\NormalTok{ =}\StringTok{ }\NormalTok{ROI)}
+\NormalTok{\}}
+
+
+
+
+\CommentTok{#For Dominicks}
+\CommentTok{#(a) }
+\NormalTok{df1 =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{ROI_Summary}\NormalTok{(D_d_f_lm, }\FloatTok{0.15}\NormalTok{))}
+\CommentTok{#(b)}
+\NormalTok{df2 =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{ROI_Summary}\NormalTok{(D_d_f_lm, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\DataTypeTok{fixed_payment_cost =} \DecValTok{3000}\NormalTok{))}
+\CommentTok{#(c)}
+\NormalTok{df3 =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{ROI_Summary}\NormalTok{(D_d_f_lm, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DataTypeTok{fixed_payment_cost =} \DecValTok{4500}\NormalTok{))}
+
+\NormalTok{D_df =}\StringTok{ }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{t}\NormalTok{(df1)), }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{t}\NormalTok{(df2)), }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{t}\NormalTok{(df3)))}
+\KeywordTok{colnames}\NormalTok{(D_df) =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Dominicks(a)"}\NormalTok{, }\StringTok{"Dominicks(b)"}\NormalTok{, }\StringTok{"Dominicks(c)"}\NormalTok{)}
+\KeywordTok{print}\NormalTok{(D_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                           Dominicks(a) Dominicks(b) Dominicks(c)
+Baseline.units             9751.5563384 9.751556e+03 9.751556e+03
+Incremental.units          3405.7695478 1.383900e+04 2.162793e+04
+Total.units               13157.3258862 2.359055e+04 3.137949e+04
+Precent.with.pa               0.0000000 0.000000e+00 0.000000e+00
+Incremental.units.with.pa     0.0000000 0.000000e+00 0.000000e+00
+Incremental.units.net      3405.7695478 1.383900e+04 2.162793e+04
+Incremental.contribution   1260.1347327 5.120429e+03 8.002336e+03
+Variable.cost              1755.2801409 1.755280e+03 1.755280e+03
+Fixed.payment.cost            0.0000000 3.000000e+03 4.500000e+03
+Event.cost                 1755.2801409 4.755280e+03 6.255280e+03
+Event.gross.contribution   -495.1454082 3.651484e+02 1.747056e+03
+ROI                          -0.2820891 7.678799e-02 2.792929e-01
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Consider stockpiling is 20%}
+\CommentTok{#(a) }
+\NormalTok{df1 =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{ROI_Summary}\NormalTok{(D_d_f_lm, }\FloatTok{0.15}\NormalTok{, }\DataTypeTok{Stockpiling =} \FloatTok{0.2}\NormalTok{))}
+\CommentTok{#(b)}
+\NormalTok{df2 =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{ROI_Summary}\NormalTok{(D_d_f_lm, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\DataTypeTok{fixed_payment_cost =} \DecValTok{3000}\NormalTok{, }\DataTypeTok{Stockpiling =} \FloatTok{0.2}\NormalTok{))}
+\CommentTok{#(c)}
+\NormalTok{df3 =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{ROI_Summary}\NormalTok{(D_d_f_lm, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DataTypeTok{fixed_payment_cost =} \DecValTok{4500}\NormalTok{, }\DataTypeTok{Stockpiling =} \FloatTok{0.2}\NormalTok{))}
+
+\NormalTok{D_}\DecValTok{20}\NormalTok{_df =}\StringTok{ }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{t}\NormalTok{(df1)), }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{t}\NormalTok{(df2)), }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{t}\NormalTok{(df3)))}
+\KeywordTok{colnames}\NormalTok{(D_}\DecValTok{20}\NormalTok{_df) =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Dominicks(a)"}\NormalTok{, }\StringTok{"Dominicks(b)"}\NormalTok{, }\StringTok{"Dominicks(c)"}\NormalTok{)}
+\KeywordTok{print}\NormalTok{(D_}\DecValTok{20}\NormalTok{_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                           Dominicks(a)  Dominicks(b) Dominicks(c)
+Baseline.units             9751.5563384  9751.5563384 9.751556e+03
+Incremental.units          3405.7695478 13838.9961068 2.162793e+04
+Total.units               13157.3258862 23590.5524453 3.137949e+04
+Precent.with.pa               0.2000000     0.2000000 2.000000e-01
+Incremental.units.with.pa   681.1539096  2767.7992214 4.325587e+03
+Incremental.units.net      2724.6156382 11071.1968855 1.730235e+04
+Incremental.contribution   1008.1077861  4096.3428476 6.401869e+03
+Variable.cost              1755.2801409  1755.2801409 1.755280e+03
+Fixed.payment.cost            0.0000000  3000.0000000 4.500000e+03
+Event.cost                 1755.2801409  4755.2801409 6.255280e+03
+Event.gross.contribution   -747.1723548  -658.9372933 1.465884e+02
+ROI                          -0.4256713    -0.1385696 2.343434e-02
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#For Jewel}
+\CommentTok{#(a) }
+\NormalTok{df1 =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{ROI_Summary}\NormalTok{(J_d_f_lm, }\FloatTok{0.15}\NormalTok{))}
+\CommentTok{#(b)}
+\NormalTok{df2 =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{ROI_Summary}\NormalTok{(J_d_f_lm, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\DataTypeTok{fixed_payment_cost =} \DecValTok{5000}\NormalTok{))}
+\CommentTok{#(c)}
+\NormalTok{df3 =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{ROI_Summary}\NormalTok{(J_d_f_lm, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DataTypeTok{fixed_payment_cost =} \DecValTok{6800}\NormalTok{))}
+
+\NormalTok{J_}\DecValTok{20}\NormalTok{_df =}\StringTok{ }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{t}\NormalTok{(df1)), }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{t}\NormalTok{(df2)), }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{t}\NormalTok{(df3)))}
+\KeywordTok{colnames}\NormalTok{(J_}\DecValTok{20}\NormalTok{_df) =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Jewel(a)"}\NormalTok{, }\StringTok{"Jewel(b)"}\NormalTok{, }\StringTok{"Jewel(c)"}\NormalTok{)}
+\KeywordTok{print}\NormalTok{(J_}\DecValTok{20}\NormalTok{_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                               Jewel(a)      Jewel(b)      Jewel(c)
+Baseline.units             9751.5563384  9751.5563384  9.751556e+03
+Incremental.units          3405.7695478 13838.9961068  2.162793e+04
+Total.units               13157.3258862 23590.5524453  3.137949e+04
+Precent.with.pa               0.0000000     0.0000000  0.000000e+00
+Incremental.units.with.pa     0.0000000     0.0000000  0.000000e+00
+Incremental.units.net      3405.7695478 13838.9961068  2.162793e+04
+Incremental.contribution   1260.1347327  5120.4285595  8.002336e+03
+Variable.cost              1755.2801409  1755.2801409  1.755280e+03
+Fixed.payment.cost            0.0000000  5000.0000000  6.800000e+03
+Event.cost                 1755.2801409  6755.2801409  8.555280e+03
+Event.gross.contribution   -495.1454082 -1634.8515814 -5.529445e+02
+ROI                          -0.2820891    -0.2420109 -6.463196e-02
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Consider stockpiling is 20%}
+\CommentTok{#(a) }
+\NormalTok{df1 =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{ROI_Summary}\NormalTok{(J_d_f_lm, }\FloatTok{0.15}\NormalTok{, }\DataTypeTok{Stockpiling =} \FloatTok{0.2}\NormalTok{))}
+\CommentTok{#(b)}
+\NormalTok{df2 =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{ROI_Summary}\NormalTok{(J_d_f_lm, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\DataTypeTok{Stockpiling =} \FloatTok{0.2}\NormalTok{, }\DataTypeTok{fixed_payment_cost =} \DecValTok{5000}\NormalTok{))}
+\CommentTok{#(c)}
+\NormalTok{df3 =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{ROI_Summary}\NormalTok{(J_d_f_lm, }\FloatTok{0.15}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DataTypeTok{Stockpiling =} \FloatTok{0.2}\NormalTok{, }\DataTypeTok{fixed_payment_cost =} \DecValTok{6800}\NormalTok{))}
+
+\NormalTok{J_}\DecValTok{20}\NormalTok{_df =}\StringTok{ }\KeywordTok{cbind}\NormalTok{(}\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{t}\NormalTok{(df1)), }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{t}\NormalTok{(df2)), }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{t}\NormalTok{(df3)))}
+\KeywordTok{colnames}\NormalTok{(J_}\DecValTok{20}\NormalTok{_df) =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Jewel(a)"}\NormalTok{, }\StringTok{"Jewel(b)"}\NormalTok{, }\StringTok{"Jewel(c)"}\NormalTok{)}
+\KeywordTok{print}\NormalTok{(J_}\DecValTok{20}\NormalTok{_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                               Jewel(a)      Jewel(b)      Jewel(c)
+Baseline.units             9751.5563384  9751.5563384  9751.5563384
+Incremental.units          3405.7695478 13838.9961068 21627.9341851
+Total.units               13157.3258862 23590.5524453 31379.4905235
+Precent.with.pa               0.2000000     0.2000000     0.2000000
+Incremental.units.with.pa   681.1539096  2767.7992214  4325.5868370
+Incremental.units.net      2724.6156382 11071.1968855 17302.3473481
+Incremental.contribution   1008.1077861  4096.3428476  6401.8685188
+Variable.cost              1755.2801409  1755.2801409  1755.2801409
+Fixed.payment.cost            0.0000000  5000.0000000  6800.0000000
+Event.cost                 1755.2801409  6755.2801409  8555.2801409
+Event.gross.contribution   -747.1723548 -2658.9372933 -2153.4116221
+ROI                          -0.4256713    -0.3936087    -0.2517056
+\end{verbatim}
+
+\hypertarget{head-3}{%
+\section{\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}\textless{}
+HEAD}\label{head-3}}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Lift Factor for Donimick's: 1.349254; Lift Factor for Jewel's:
+  1.361185;
+\item
+  Lift Factor for Donimick's: 2.419158; Lift Factor for Jewel's:
+  2.87767;
+\item
+  Lift Factor for Donimick's: 3.217896; Lift Factor for Jewel's:
+  2.877672;
+  \textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}\textgreater{}
+  upstream/master
+\end{enumerate}
+
+\end{document}
