@@ -141,6 +141,9 @@ cor(hellmans_df$feature_pctacv, hellmans_df$price)
 cor(hellmans_df$display_pctacv, hellmans_df$price)
 ```
 
+For % of stores featuring the product, the value is either 0 or 100%. This indicates either all stores under the same brand features at the same time, or they all don’t feature at the same time. For display, the percentage of stores displaying the product vary over time and usually not all of them display at the same time. And based on the analysis, Jewel puts on display more often on a higher percentage versus Dominick’s.
+Feature and Display correlate positively, which means when featuring happens, it’s likely to be coupled by display. Price correlates negatively with both Feature and Display, which indicates a price reduction will happen when the product is in display or being featured. It could be a potential problem for our regression analysis if we only consider Price as the independent variable; therefore we need to carefully handle Feature and Display as variables when we build the regression model. 
+
 
 
 \newpage
@@ -199,6 +202,7 @@ summary(J_d_f_lm)
 
 # add display improve the model, reduce deviance. However, add feature just improve it a little bit, since feature and display has high correlation. The elastict drop from 4.5 to 1.8 to 1.1 around for both account. We can consider display and feature are ommited variables for the first model.
 ```
+Adding Feature and Display into the regression model reduced the coefficient for Price (from -4.1665 to -1.8432 for Dominick’s and from –4.58359 to -1.89735 for Jewel). This is in line with our expectation because in part 1 we noticed Price and Display and Feature are negatively correlated, so the two variables’ effect was all attributed to Price when we only used Price as the independent variable. In other words, if we only use Price as a dependent variable, then all sales change will be attributed to the change in price. But when we include both Display and Feature, the impact of display and feature is then valuated separately, i.e. when feature or display happens price is usually discounted at the same time, so the coefficient of price decreases.
 
 \newpage
 
@@ -372,3 +376,7 @@ J_20_df = cbind(data.frame(t(df1)), data.frame(t(df2)), data.frame(t(df3)))
 colnames(J_20_df) = c("Jewel(a)", "Jewel(b)", "Jewel(c)")
 print(J_20_df)
 ```
+
+(a) Lift Factor for Donimick's: 1.349254; Lift Factor for Jewel's: 1.361185;
+(b) Lift Factor for Donimick's: 2.419158; Lift Factor for Jewel's: 2.87767;
+(c) Lift Factor for Donimick's: 3.217896; Lift Factor for Jewel's: 2.877672;
