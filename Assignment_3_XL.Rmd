@@ -33,8 +33,11 @@ print(eventsummary)
 ```
 Per summary Table, the incremental sales response for event 1 is 33.60% and for event 2 is 69.33%.
 
+Kailin - 55% and 69%.
+
 3. Profitability results
 From ROI per event summary, event 5 is the most profitable with a ROI of 53%. Event 2 is the second, with a ROI of 44%. Event 1 does not have a profitable result with the promotion, with a negative ROI of -2%. Event 3, and 4 are even worse with much more negative ROIs of -22% and -79%.
+An effective promotion should generate high percentage of incremental sales compared to the baseline sales. The foregone cash flow or opportunity cost of carrying a price reduction promotion should not be greater than the additional revenue brought in by the promotion. For example, Event 5 occured in slow demand season whose baseline sales were low (333). So for giving up the opportunity cost of 333 x $4.2 = $1399, the promotion earned additional revenue from 602 x $(20-4.2) = $9512, and is hence a successful campaign.
 
 4. The profitability with forward buying
 ```{r}
@@ -47,8 +50,10 @@ print(eventsummary2)
 ```
 The profit for event 1 will be -1145 with a ROI of -14.28% and for event 2 will be 4776 with a ROI of 25.30%.
 
+Kailin: -12% and 34%
+ation. While the method we discussed in class compares "with the event" and "without the event" two scenarios and therefore only take into account the baseline consumption in the variable costs to account for the "foregone cash flow" or opportunity cost. For example in question 3, using the method from lecture can quickly tell us if a promotion is worth carrying out or not. Depends on the focus of the study, the BAH method is more applicable when considering each unit sale, while the one took in class is more generally applicable.
 5. The approaches to calculate ROIs
-The Booz Allen Hamilton (BAH) approach and the one took in class are equally good. The BAH method is more applicable when considering each unit sale, while the one took in class is more generally applicable.
+The Booz Allen Hamilton (BAH) approach and the one took in class are equally good. The BAH method includes both the baseline consumption as well as the incremental sales volume when calculating variable costs, this implies the assumption that during planning the promotion event is part of the total consider
 
 ```{r cars}
 summary(cars)
