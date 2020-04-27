@@ -32,7 +32,6 @@ print(eventsummary)
 ```
 Per summary Table, the incremental sales response for event 1 is 33.60% and for event 2 is 69.33%.
 
-Kailin: 55% and 69%.
 
 
 3. Profitability results
