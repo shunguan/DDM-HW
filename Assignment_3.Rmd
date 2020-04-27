@@ -37,7 +37,9 @@ Per summary Table, the incremental sales response for event 1 is 33.60% and for 
 3. Profitability results
 From ROI per event summary, event 5 is the most profitable with a ROI of 53%. Event 2 is the second, with a ROI of 44%. Event 1 does not have a profitable result with the promotion, with a negative ROI of -2%. Event 3, and 4 are even worse with much more negative ROIs of -22% and -79%.
 
+Comparing Event 4 and Event 5, ROI ranges from -79% to 53%, essentially the percentage of display and the degree of price discount have a significant impact on final ROI. Comparing Event 3 and Event 5, Display tends to be more effective than feature. 
 An effective promotion should generate high percentage of incremental sales compared to the baseline sales. The foregone cash flow or opportunity cost of carrying a price reduction promotion should not be greater than the additional revenue brought in by the promotion. For example, Event 5 occured in slow demand season whose baseline sales were low (333). So for giving up the opportunity cost of 333 x $4.2 = $1399, the promotion earned additional revenue from 602 x $(20-4.2) = $9512, and is hence a successful campaign.
+
 
 
 4. The profitability with forward buying
