@@ -258,6 +258,12 @@ print(lift_factor(D_d_f_lm, 0.15, 0.7, 1))
 print(lift_factor(J_d_f_lm, 0.15, 0.7, 1))
 
 ```
+
+(a) Lift Factor for Donimick's: 1.349254; Lift Factor for Jewel's: 1.361185;
+(b) Lift Factor for Donimick's: 2.419158; Lift Factor for Jewel's: 2.87767;
+(c) Lift Factor for Donimick's: 3.217896; Lift Factor for Jewel's: 2.877672;
+
+
 \newpage
 
 ## Question 4
